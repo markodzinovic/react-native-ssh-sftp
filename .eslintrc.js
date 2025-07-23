@@ -9,14 +9,8 @@ module.exports = {
   env: {
     es6: true,
   },
-  plugins: [
-    '@typescript-eslint'
-  ],
-  extends: [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/eslint-recommended',
-    'plugin:@typescript-eslint/recommended',
-  ],
+  plugins: ['@typescript-eslint'],
+  extends: ['eslint:recommended', 'plugin:@typescript-eslint/eslint-recommended', 'plugin:@typescript-eslint/recommended'],
   parserOptions: {
     ecmaVersion: 2019,
     sourceType: 'module',
@@ -31,10 +25,10 @@ module.exports = {
     // these rules help us keep the code readable & consistent
     'max-len': ['warn', { code: 240 }],
     'max-lines-per-function': ['error', { max: 50, skipComments: true, skipBlankLines: true }],
-    'quotes': ['error', 'single'],
-    'indent': ['error', 2],
-    'linebreak-style': ['error', 'unix'],
+    quotes: ['error', 'single'],
+    'linebreak-style': 0, // or ['off']
+    indent: 0,
     'no-trailing-spaces': ['error'],
-    'semi': ['error', 'always'],
+    semi: ['error', 'always'],
   },
 };

@@ -640,6 +640,30 @@ public class RNSshClientModule extends ReactContextBaseJavaModule {
     }).start();
   }
 
+   @ReactMethod
+  public void sftpUploadWithCustomName(final String filePath, final String path, final String fileName, final String key, final Callback callback) {
+    new Thread(new Runnable()  {
+      public void run() {
+        try {
+          SSHClient client = clientPool.get(key);
+          if (client == null) {
+              throw new Exception("client is null");
+          }
+          client._uploadContinue = true;
+          ChannelSftp channelSftp = client._sftpSession;
+          channelSftp.put(filePath, path + '/' + fileName, new progressMonitor(key, "UploadProgress"), ChannelSftp.OVERWRITE);
+          callback.invoke();
+        } catch (SftpException error) {
+          Log.e(LOGTAG, "Failed to upload " + filePath);
+          callback.invoke("Failed to upload " + filePath);
+        } catch (Exception error) {
+          Log.e(LOGTAG, "Failed to upload " + filePath);
+          callback.invoke("Failed to upload " + filePath);
+        }
+      }
+    }).start();
+  }
+
   @ReactMethod
   public void sftpCancelDownload(final String key) {
     SSHClient client = clientPool.get(key);
