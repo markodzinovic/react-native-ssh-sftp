@@ -52,6 +52,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
 
 public class RNSshClientModule extends ReactContextBaseJavaModule {
   private class SSHClient {
