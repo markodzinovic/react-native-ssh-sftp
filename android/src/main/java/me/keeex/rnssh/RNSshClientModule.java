@@ -671,13 +671,11 @@ public class RNSshClientModule extends ReactContextBaseJavaModule {
             @Override
             public void run() {
                 try {
-                    // Dekodiraj Base64
-                    byte[] fileBytes = android.util.Base64.decode(base64, android.util.Base64.DEFAULT);
+                    byte[] decodedBytes = android.util.Base64.decode(base64, android.util.Base64.NO_WRAP);
 
-                    // Sačuvaj u temp fajl
                     File tempFile = new File(getReactApplicationContext().getCacheDir(), fileName);
                     FileOutputStream fos = new FileOutputStream(tempFile);
-                    fos.write(fileBytes);
+                    fos.write(decodedBytes);
                     fos.close();
 
                     // Upload preko SFTP
