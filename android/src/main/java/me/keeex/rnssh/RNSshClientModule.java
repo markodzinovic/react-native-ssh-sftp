@@ -664,6 +664,38 @@ public class RNSshClientModule extends ReactContextBaseJavaModule {
     }).start();
   }
 
+   @ReactMethod
+    public void sftpUploadBase64(final String base64, final String path, final String fileName, final String key, final Callback callback) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    // Dekodiraj Base64
+                    byte[] fileBytes = android.util.Base64.decode(base64, android.util.Base64.DEFAULT);
+
+                    // Sačuvaj u temp fajl
+                    File tempFile = new File(getReactApplicationContext().getCacheDir(), fileName);
+                    FileOutputStream fos = new FileOutputStream(tempFile);
+                    fos.write(fileBytes);
+                    fos.close();
+
+                    // Upload preko SFTP
+                    SSHClient client = clientPool.get(key);
+                    if (client == null) throw new Exception("client is null");
+
+                    client._uploadContinue = true;
+                    ChannelSftp channelSftp = client._sftpSession;
+                    channelSftp.put(tempFile.getAbsolutePath(), path + "/" + fileName, new progressMonitor(key, "UploadProgress"), ChannelSftp.OVERWRITE);
+
+                    callback.invoke(); // uspešno
+                } catch (Exception e) {
+                    Log.e(LOGTAG, "Failed to upload Base64 file", e);
+                    callback.invoke("Failed to upload Base64 file: " + e.getMessage());
+                }
+            }
+        }).start();
+    }
+
   @ReactMethod
   public void sftpCancelDownload(final String key) {
     SSHClient client = clientPool.get(key);

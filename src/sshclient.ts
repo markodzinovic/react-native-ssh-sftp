@@ -75,7 +75,6 @@ export interface keyDetail {
   keySize?: number;
 }
 
-
 /**
  * Represents a password or key for authentication.
  */
@@ -89,11 +88,11 @@ export type PasswordOrKey = string | KeyPair;
  */
 export default class SSHClient {
   /**
-  * Retrieves the details of an SSH key.
-  * @param key - The SSH private key as a string.
-  * @returns A Promise that resolves to the details of the key, including its type and size.
-  */
-  static getKeyDetails(key: string): Promise<{ keyType: string, keySize: number }> {
+   * Retrieves the details of an SSH key.
+   * @param key - The SSH private key as a string.
+   * @returns A Promise that resolves to the details of the key, including its type and size.
+   */
+  static getKeyDetails(key: string): Promise<{ keyType: string; keySize: number }> {
     return new Promise((resolve, reject) => {
       RNSSHClient.getKeyDetails(key)
         .then((result: keyDetail) => {
@@ -102,7 +101,7 @@ export default class SSHClient {
           /* eslint-enable no-console */
           resolve({
             keyType: result.keyType,
-            keySize: result.keySize || 0
+            keySize: result.keySize || 0,
           });
         })
         .catch((error: CBError) => {
@@ -113,7 +112,6 @@ export default class SSHClient {
   static generateKeyPair(type: string, passphrase?: string, keySize?: number, comment?: string): Promise<genKeyPair> {
     return new Promise((resolve, reject) => {
       RNSSHClient.generateKeyPair(type, passphrase, keySize, comment, (error: CBError, keys: KeyPair) => {
-
         if (error) {
           reject(error);
         } else {
@@ -122,7 +120,6 @@ export default class SSHClient {
             publicKey: keys.publicKey,
           });
         }
-
       });
     });
   }
@@ -646,6 +643,7 @@ export default class SSHClient {
         })
     );
   }
+
   sftpUploadWithCustomName(localFilePath: string, remoteFilePath: string, fileName: string, callback?: CallbackFunction<void>): Promise<void> {
     return this.checkSFTP(callback).then(
       () =>
@@ -660,6 +658,24 @@ export default class SSHClient {
             if (error) {
               return reject(error);
             }
+
+            resolve();
+          });
+        })
+    );
+  }
+
+  sftpUploadBase64(base64: string, remoteFilePath: string, fileName: string, callback?: CallbackFunction<void>): Promise<void> {
+    return this.checkSFTP(callback).then(
+      () =>
+        new Promise((resolve, reject) => {
+          ++this._counters.upload;
+
+          RNSSHClient.sftpUploadBase64(base64, remoteFilePath, fileName, this._key, (error: CBError) => {
+            --this._counters.upload;
+
+            if (callback) callback(error);
+            if (error) return reject(error);
 
             resolve();
           });

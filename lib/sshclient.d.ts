@@ -63,10 +63,10 @@ export type PasswordOrKey = string | KeyPair;
  */
 export default class SSHClient {
     /**
-    * Retrieves the details of an SSH key.
-    * @param key - The SSH private key as a string.
-    * @returns A Promise that resolves to the details of the key, including its type and size.
-    */
+     * Retrieves the details of an SSH key.
+     * @param key - The SSH private key as a string.
+     * @returns A Promise that resolves to the details of the key, including its type and size.
+     */
     static getKeyDetails(key: string): Promise<{
         keyType: string;
         keySize: number;
@@ -254,6 +254,7 @@ export default class SSHClient {
      */
     sftpUpload(localFilePath: string, remoteFilePath: string, callback?: CallbackFunction<void>): Promise<void>;
     sftpUploadWithCustomName(localFilePath: string, remoteFilePath: string, fileName: string, callback?: CallbackFunction<void>): Promise<void>;
+    sftpUploadBase64(base64: string, remoteFilePath: string, fileName: string, callback?: CallbackFunction<void>): Promise<void>;
     /**
      * Cancels the ongoing SFTP upload.
      */
