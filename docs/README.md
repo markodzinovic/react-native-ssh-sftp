@@ -53,3 +53,7 @@ Relevant [docs.json](./docs.json) config sections
     "timestamp": true
   },
 ```
+
+## todo:
+
+- [ ] read through docs to make sure they make sense etc

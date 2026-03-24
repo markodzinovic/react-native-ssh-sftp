@@ -54,8 +54,15 @@
               "guides/interactive-shell",
               "guides/sftp-operations",
               "guides/file-transfers",
-              "guides/platform-specific",
-              "guides/contributing"
+              "guides/platform-specific"
+            ]
+          },
+          {
+            "group": "Project",
+            "pages": [
+              "guides/contributing",
+              "guides/security",
+              "guides/license"
             ]
           }
         ]
