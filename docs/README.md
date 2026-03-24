@@ -33,3 +33,19 @@ If you have forked this repo, install the Mintlify GitHub app from your [dashboa
 ## Resources
 
 - [Mintlify documentation](https://mintlify.com/docs)
+
+## Known issues
+
+The mintlify local development has a couple of known issues to be aware of; you will see the following differences when viewing the localhost version of the documentation vs. the deployed version:
+
+1. The favicon for the site is only visible on the deployed site
+1. The timestamp at the bottom of each page is only visible on the deployed site, i.e. `Last modified on March 6, 2026`
+
+Relevant [docs.json](./docs.json) config sections
+
+```json
+  "favicon": "/favicon.ico",
+  "metadata": {
+    "timestamp": true
+  },
+```

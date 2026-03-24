@@ -3,6 +3,8 @@ title: Error Handling
 description: Best practices for handling errors in React Native SSH SFTP
 ---
 
+import { EditThisPage } from "/snippets/edit-this-page.jsx"
+
 ## Promise Rejection Patterns
 
 All asynchronous operations in the React Native SSH SFTP library return Promises that reject when errors occur. This provides a consistent error handling pattern across the API.
@@ -418,3 +420,5 @@ if (Platform.OS === 'ios' && __DEV__) {
 - Review [Authentication](/concepts/authentication) for credential handling
 - Learn about [Connection Management](/concepts/connection-management) for proper lifecycle management
 - Explore the [API Reference](/api/sshclient) for complete method documentation
+
+<EditThisPage filePath="docs/concepts/error-handling.mdx" />

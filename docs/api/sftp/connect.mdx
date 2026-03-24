@@ -3,6 +3,8 @@ title: 'SFTP Connection'
 description: 'Connect and disconnect from SFTP servers'
 ---
 
+import { EditThisPage } from "/snippets/edit-this-page.jsx"
+
 ## connectSFTP()
 
 Connects to the SFTP server.
@@ -92,3 +94,5 @@ console.log('SFTP disconnected');
 
 - **Android**: Fully supported. Explicitly closes the SFTP channel.
 - **iOS**: The SFTP stream will be closed when `disconnect()` is called on the SSH client.
+
+<EditThisPage filePath="docs/api/sftp/connect.mdx" />
