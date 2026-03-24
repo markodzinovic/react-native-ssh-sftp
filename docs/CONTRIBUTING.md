@@ -21,11 +21,11 @@ If you would like to contribute to the code, please see the main [contributing g
 1. Run `npm run docs` to build and view your changes at `http://localhost:3000`
 1. Commit your changes and submit a pull request
 
-For more details on local development, see our [development guide](development.mdx).
+For more details on local development, see the [docs README](/README.md).
 
 ## Writing guidelines
 
-- **Use active voice**: "Run the command" not "The command should be run"
+- **Use an active voice**: "Run the command" not "The command should be run"
 - **Address the reader directly**: Use "you" instead of "the user"
 - **Keep sentences concise**: Aim for one idea per sentence
 - **Lead with the goal**: Start instructions with what the user wants to accomplish

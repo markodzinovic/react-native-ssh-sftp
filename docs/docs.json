@@ -54,7 +54,8 @@
               "guides/interactive-shell",
               "guides/sftp-operations",
               "guides/file-transfers",
-              "guides/platform-specific"
+              "guides/platform-specific",
+              "guides/contributing"
             ]
           }
         ]

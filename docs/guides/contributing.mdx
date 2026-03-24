@@ -1,0 +1,121 @@
+---
+title: Contributing
+description: Help improve React Native SSH SFTP by contributing code, documentation, issues, and feedback
+---
+
+import { EditThisPage } from "/snippets/edit-this-page.jsx"
+
+# Contributing
+
+Thank you for your interest in improving React Native SSH SFTP.
+
+You can contribute in a few different ways:
+
+<CardGroup cols={2}>
+  <Card title="Code Contributions" icon="code" href="#contributing-code">
+    Add features, fix bugs, improve tests, and help keep the library reliable across iOS and Android.
+  </Card>
+  <Card title="Documentation Contributions" icon="book-open" href="#contributing-documentation">
+    Improve guides, clarify examples, fix mistakes, and help other developers get up to speed faster.
+  </Card>
+  <Card title="Issues & Feedback" icon="circle-dot" href="https://github.com/dylankenneally/react-native-ssh-sftp/issues">
+    Report bugs, request improvements, and share details that help reproduce problems.
+  </Card>
+  <Card title="Community Help" icon="users" href="https://github.com/dylankenneally/react-native-ssh-sftp/discussions">
+    Answer questions, share usage patterns, and help shape the project through discussions.
+  </Card>
+</CardGroup>
+
+## Before you start
+
+Before opening a pull request:
+
+1. Check whether an [issue already exists](https://github.com/dylankenneally/react-native-ssh-sftp/issues).
+1. If not, [raise an issue](https://github.com/dylankenneally/react-native-ssh-sftp/issues/new/choose) for the work you plan to do.
+1. Fork the repository and clone your fork locally.
+1. Create a focused feature branch for your change.
+
+## Contributing code
+
+Use this flow for library changes:
+
+<Steps>
+  <Step title="Fork and clone the repository">
+    Clone your fork locally:
+
+    ```bash
+    git clone https://github.com/your-username/react-native-ssh-sftp.git
+    cd react-native-ssh-sftp
+    ```
+  </Step>
+  <Step title="Install dependencies">
+    Install the project dependencies:
+
+    ```bash
+    npm install
+    ```
+  </Step>
+  <Step title="Create a branch">
+    Create a branch for your work:
+
+    ```bash
+    git checkout -b feature/your-feature
+    ```
+  </Step>
+  <Step title="Make your changes">
+    Follow the existing code style, keep commits clear, and update documentation when your change affects usage or behavior.
+  </Step>
+  <Step title="Open a pull request">
+    Push your branch, open a pull request, and reference any related issues so reviewers have the right context.
+  </Step>
+</Steps>
+
+## Contributing documentation
+
+If you want to improve the docs, you can either edit directly on GitHub or work locally.
+
+<Tabs>
+  <Tab title="Edit on GitHub">
+    1. Navigate to the page you want to change.
+    1. Click the edit link on the page.
+    1. Make your update in GitHub and submit a pull request.
+  </Tab>
+  <Tab title="Develop locally">
+    1. Fork and clone the repository.
+    1. Install dependencies with `npm install`.
+    1. Run the docs locally:
+
+    ```bash
+    npm run docs
+    ```
+
+    1. Open `http://localhost:3000` to preview your changes.
+    1. Commit and submit a pull request when your update is ready.
+  </Tab>
+</Tabs>
+
+## Writing guidelines
+
+When contributing docs:
+
+- **Use an active voice**: "Run the command" not "The command should be run"
+- **Address the reader directly**: Use "you" instead of "the user"
+- **Keep sentences concise**: Aim for one idea per sentence
+- **Lead with the goal**: Start instructions with what the user wants to accomplish
+- **Use consistent terminology**: Don't alternate between synonyms for the same concept
+- **Include examples**: Show, don't just tell
+
+## Submitting changes
+
+When your work is ready:
+
+1. Push your branch to your fork.
+1. Open a pull request with a clear description of the change.
+1. Link any [related issues](https://github.com/dylankenneally/react-native-ssh-sftp/issues).
+1. Respond to review feedback and update the pull request as needed.
+
+## Questions or ideas?
+
+If you are not sure where to start, open an issue or join the [GitHub Discussions](https://github.com/dylankenneally/react-native-ssh-sftp/discussions).
+
+<EditThisPage filePath="docs/guides/contributing.mdx" />
