@@ -1,4 +1,3 @@
-
 # Contributing Guide
 
 Thank you for your interest in contributing to `react-native-ssh-sftp`.

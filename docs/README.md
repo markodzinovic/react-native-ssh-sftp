@@ -21,6 +21,10 @@ View your local preview at `http://localhost:3000`.
 
 Changes are deployed to production automatically after pushing to the default branch.
 
+### Contributing changes
+
+See the [contributing guide for this documentation](./CONTRIBUTING.md).
+
 If you are working on _this_ repo, visit your [Mintlify Dashboard](https://dashboard.mintlify.com) to make changes to the publication strategy. <small>NB: the login details for the dashboard are <github+mintlify.com@dylankenneally.com> with a 'magic link'.</small>
 
 If you have forked this repo, install the Mintlify GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app) to propagate changes from your repo to your deployment.
