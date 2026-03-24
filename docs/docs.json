@@ -56,6 +56,14 @@
               "guides/file-transfers",
               "guides/platform-specific"
             ]
+          },
+          {
+            "group": "Project",
+            "pages": [
+              "guides/contributing",
+              "guides/security",
+              "guides/license"
+            ]
           }
         ]
       },

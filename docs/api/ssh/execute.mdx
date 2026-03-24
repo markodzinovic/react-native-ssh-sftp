@@ -3,6 +3,8 @@ title: 'execute()'
 description: 'Execute a command on the SSH server'
 ---
 
+import { EditThisPage } from "/snippets/edit-this-page.jsx"
+
 ## Overview
 
 Executes a command on the connected SSH server and returns the output.
@@ -77,3 +79,5 @@ client.execute('pwd', (error, response) => {
 - Each call to `execute()` creates a new execution context
 - For interactive shell sessions, use [startShell()](/api/ssh/shell) instead
 - The method returns the combined stdout/stderr output from the command
+
+<EditThisPage filePath="docs/api/ssh/execute.mdx" />

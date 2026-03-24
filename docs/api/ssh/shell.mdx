@@ -3,6 +3,8 @@ title: 'Shell Operations'
 description: 'Interactive shell session management'
 ---
 
+import { EditThisPage } from "/snippets/edit-this-page.jsx"
+
 ## Overview
 
 Manage interactive shell sessions on the SSH server, allowing you to start shells, write commands, and handle shell output through events.
@@ -290,3 +292,5 @@ await client.startShell(PtyType.XTERM);
 // Or use VANILLA for simple cases
 await client.startShell(PtyType.VANILLA);
 ```
+
+<EditThisPage filePath="docs/api/ssh/shell.mdx" />

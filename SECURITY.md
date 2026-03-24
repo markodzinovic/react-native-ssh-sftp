@@ -14,7 +14,7 @@ Please do not open a public issue for security vulnerabilities.
 ## Supported Versions
 
 | Version | Supported          |
-|---------|-------------------|
+|---------|--------------------|
 | Latest  | :white_check_mark: |
 | Previous| :white_check_mark: |
 | Older   | :x:                |

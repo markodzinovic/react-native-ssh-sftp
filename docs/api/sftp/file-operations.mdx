@@ -3,6 +3,8 @@ title: 'SFTP File Operations'
 description: 'Manage files on remote servers using SFTP'
 ---
 
+import { EditThisPage } from "/snippets/edit-this-page.jsx"
+
 ## sftpRm()
 
 Removes (unlinks) a file from the remote server using SFTP.
@@ -202,3 +204,5 @@ client.sftpChmod('/home/user/script.sh', 0o755, (error) => {
 
 - **Android**: Fully supported
 - **iOS**: Not supported
+
+<EditThisPage filePath="docs/api/sftp/file-operations.mdx" />

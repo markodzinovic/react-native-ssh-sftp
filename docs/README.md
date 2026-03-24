@@ -21,6 +21,10 @@ View your local preview at `http://localhost:3000`.
 
 Changes are deployed to production automatically after pushing to the default branch.
 
+### Contributing changes
+
+See the [contributing guide for this documentation](./CONTRIBUTING.md).
+
 If you are working on _this_ repo, visit your [Mintlify Dashboard](https://dashboard.mintlify.com) to make changes to the publication strategy. <small>NB: the login details for the dashboard are <github+mintlify.com@dylankenneally.com> with a 'magic link'.</small>
 
 If you have forked this repo, install the Mintlify GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app) to propagate changes from your repo to your deployment.
@@ -33,3 +37,19 @@ If you have forked this repo, install the Mintlify GitHub app from your [dashboa
 ## Resources
 
 - [Mintlify documentation](https://mintlify.com/docs)
+
+## Known issues
+
+The mintlify local development has a couple of known issues to be aware of; you will see the following differences when viewing the localhost version of the documentation vs. the deployed version:
+
+1. The favicon for the site is only visible on the deployed site
+1. The timestamp at the bottom of each page is only visible on the deployed site, i.e. `Last modified on March 6, 2026`
+
+Relevant [docs.json](./docs.json) config sections
+
+```json
+  "favicon": "/favicon.ico",
+  "metadata": {
+    "timestamp": true
+  },
+```
