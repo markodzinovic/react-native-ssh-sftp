@@ -1,13 +1,21 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "name": "React Native SSH SFTP",
-  "theme": "palm",
+  "theme": "mint",
   "colors": {
-    "primary": "#2E7D32",
-    "light": "#66BB6A",
-    "dark": "#1B5E20"
+    "primary": "#58a6ff",
+    "light": "#58a6ff",
+    "dark": "#58a6ff"
+  },
+  "logo": "/logo/logo.svg",
+  "favicon": "/favicon.ico",
+  "metadata": {
+    "timestamp": true
   },
   "navbar": {
+    "links": [
+      { "label": "Community", "href": "https://github.com/dylankenneally/react-native-ssh-sftp/discussions" }
+    ],
     "primary": {
       "type": "github",
       "href": "https://github.com/dylankenneally/react-native-ssh-sftp"
@@ -91,5 +99,12 @@
   "appearance": {
     "strict": false,
     "default": "system"
+  },
+  "errors": {
+    "404": {
+      "redirect": false,
+      "title": "Page not found :-(",
+      "description": "The page you're looking for doesn't exist. [Go home](/)."
+    }
   }
 }
