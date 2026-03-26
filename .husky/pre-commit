@@ -5,7 +5,6 @@ function log() {
 }
 
 log "Running git pre commit..."
-. "$(dirname "$0")/_/husky.sh"
 
 function hasChanges() {
   if test "$( git status --short | wc -l )" -gt 0; then
