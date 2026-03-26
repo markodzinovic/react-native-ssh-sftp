@@ -1,6 +1,6 @@
 ---
 title: File Transfers
-description: Upload and download files with progress tracking and cancellation support
+description: Upload and download files with progress tracking and cancellation support.
 ---
 
 import { EditThisPage } from "/snippets/edit-this-page.jsx"
@@ -27,7 +27,7 @@ console.log('File downloaded to:', downloadedPath);
     ```javascript
     import SSHClient from '@dylankenneally/react-native-ssh-sftp';
     import RNFS from 'react-native-fs';
-    
+
     const downloadFile = async () => {
       try {
         const client = await SSHClient.connectWithPassword(
@@ -36,13 +36,13 @@ console.log('File downloaded to:', downloadedPath);
           'user',
           'password'
         );
-        
+
         const localPath = RNFS.DocumentDirectoryPath;
         const downloadedFile = await client.sftpDownload(
           '/home/user/document.pdf',
           localPath
         );
-        
+
         console.log('Downloaded to:', downloadedFile);
         client.disconnect();
       } catch (error) {
@@ -51,12 +51,12 @@ console.log('File downloaded to:', downloadedPath);
     };
     ```
   </Tab>
-  
+
   <Tab title="Callback">
     ```javascript
     import SSHClient from '@dylankenneally/react-native-ssh-sftp';
     import RNFS from 'react-native-fs';
-    
+
     SSHClient.connectWithPassword(
       '10.0.0.10',
       22,
@@ -64,7 +64,7 @@ console.log('File downloaded to:', downloadedPath);
       'password'
     ).then(client => {
       const localPath = RNFS.DocumentDirectoryPath;
-      
+
       client.sftpDownload(
         '/home/user/document.pdf',
         localPath,
@@ -109,13 +109,13 @@ const uploadFile = async () => {
       'user',
       'password'
     );
-    
+
     const localFile = `${RNFS.DocumentDirectoryPath}/photo.jpg`;
     const remotePath = '/home/user/uploads/';
-    
+
     await client.sftpUpload(localFile, remotePath);
     console.log('Upload complete');
-    
+
     client.disconnect();
   } catch (error) {
     console.error('Upload failed:', error);
@@ -132,14 +132,14 @@ Monitor upload and download progress in real-time using event listeners.
 <Steps>
   <Step title="Register the progress handler">
     Set up the `DownloadProgress` event listener **before** starting the download:
-    
+
     ```javascript
     client.on('DownloadProgress', (event) => {
       console.log('Download progress:', event);
     });
     ```
   </Step>
-  
+
   <Step title="Start the download">
     ```javascript
     await client.sftpDownload(
@@ -155,14 +155,14 @@ Monitor upload and download progress in real-time using event listeners.
 <Steps>
   <Step title="Register the progress handler">
     Set up the `UploadProgress` event listener **before** starting the upload:
-    
+
     ```javascript
     client.on('UploadProgress', (event) => {
       console.log('Upload progress:', event);
     });
     ```
   </Step>
-  
+
   <Step title="Start the upload">
     ```javascript
     await client.sftpUpload(
@@ -182,37 +182,37 @@ Monitor upload and download progress in real-time using event listeners.
     import { View, Text, Button, ProgressBarAndroid } from 'react-native';
     import SSHClient from '@dylankenneally/react-native-ssh-sftp';
     import RNFS from 'react-native-fs';
-    
+
     const FileDownloader = () => {
       const [progress, setProgress] = useState(0);
       const [downloading, setDownloading] = useState(false);
-      
+
       const downloadFile = async () => {
         try {
           setDownloading(true);
-          
+
           const client = await SSHClient.connectWithPassword(
             '10.0.0.10',
             22,
             'user',
             'password'
           );
-          
+
           // Track progress
           client.on('DownloadProgress', (event) => {
             if (event && event.progress !== undefined) {
               setProgress(event.progress);
             }
           });
-          
+
           await client.sftpDownload(
             '/remote/large-file.zip',
             RNFS.DocumentDirectoryPath
           );
-          
+
           setProgress(100);
           console.log('Download complete!');
-          
+
           client.disconnect();
         } catch (error) {
           console.error('Download error:', error);
@@ -220,18 +220,18 @@ Monitor upload and download progress in real-time using event listeners.
           setDownloading(false);
         }
       };
-      
+
       return (
         <View>
-          <Button 
-            title="Download File" 
+          <Button
+            title="Download File"
             onPress={downloadFile}
             disabled={downloading}
           />
           {downloading && (
             <>
-              <ProgressBarAndroid 
-                styleAttr="Horizontal" 
+              <ProgressBarAndroid
+                styleAttr="Horizontal"
                 progress={progress / 100}
               />
               <Text>{progress.toFixed(1)}%</Text>
@@ -242,44 +242,44 @@ Monitor upload and download progress in real-time using event listeners.
     };
     ```
   </Tab>
-  
+
   <Tab title="Upload with UI">
     ```javascript
     import React, { useState } from 'react';
     import { View, Text, Button, ProgressBarAndroid } from 'react-native';
     import SSHClient from '@dylankenneally/react-native-ssh-sftp';
     import RNFS from 'react-native-fs';
-    
+
     const FileUploader = () => {
       const [progress, setProgress] = useState(0);
       const [uploading, setUploading] = useState(false);
-      
+
       const uploadFile = async () => {
         try {
           setUploading(true);
-          
+
           const client = await SSHClient.connectWithPassword(
             '10.0.0.10',
             22,
             'user',
             'password'
           );
-          
+
           // Track progress
           client.on('UploadProgress', (event) => {
             if (event && event.progress !== undefined) {
               setProgress(event.progress);
             }
           });
-          
+
           await client.sftpUpload(
             `${RNFS.DocumentDirectoryPath}/large-file.zip`,
             '/remote/uploads/'
           );
-          
+
           setProgress(100);
           console.log('Upload complete!');
-          
+
           client.disconnect();
         } catch (error) {
           console.error('Upload error:', error);
@@ -287,18 +287,18 @@ Monitor upload and download progress in real-time using event listeners.
           setUploading(false);
         }
       };
-      
+
       return (
         <View>
-          <Button 
-            title="Upload File" 
+          <Button
+            title="Upload File"
             onPress={uploadFile}
             disabled={uploading}
           />
           {uploading && (
             <>
-              <ProgressBarAndroid 
-                styleAttr="Horizontal" 
+              <ProgressBarAndroid
+                styleAttr="Horizontal"
                 progress={progress / 100}
               />
               <Text>{progress.toFixed(1)}%</Text>
@@ -309,7 +309,7 @@ Monitor upload and download progress in real-time using event listeners.
     };
     ```
   </Tab>
-  
+
   <Tab title="Both with Stats">
     ```javascript
     const [stats, setStats] = useState({
@@ -318,41 +318,41 @@ Monitor upload and download progress in real-time using event listeners.
       percentage: 0,
       speed: 0  // bytes per second
     });
-    
+
     let lastUpdate = Date.now();
     let lastBytes = 0;
-    
+
     client.on('DownloadProgress', (event) => {
       const now = Date.now();
       const timeDiff = (now - lastUpdate) / 1000; // seconds
       const bytesDiff = event.bytesTransferred - lastBytes;
       const speed = timeDiff > 0 ? bytesDiff / timeDiff : 0;
-      
+
       setStats({
         bytesTransferred: event.bytesTransferred,
         totalBytes: event.totalBytes,
         percentage: (event.bytesTransferred / event.totalBytes) * 100,
         speed: speed
       });
-      
+
       lastUpdate = now;
       lastBytes = event.bytesTransferred;
     });
-    
+
     // Display helper functions
     const formatBytes = (bytes) => {
       const units = ['B', 'KB', 'MB', 'GB'];
       let size = bytes;
       let unitIndex = 0;
-      
+
       while (size >= 1024 && unitIndex < units.length - 1) {
         size /= 1024;
         unitIndex++;
       }
-      
+
       return `${size.toFixed(2)} ${units[unitIndex]}`;
     };
-    
+
     // In your JSX:
     <Text>
       {formatBytes(stats.bytesTransferred)} / {formatBytes(stats.totalBytes)}
@@ -395,12 +395,12 @@ const FileTransferWithCancel = () => {
   const [progress, setProgress] = useState(0);
   const [transferring, setTransferring] = useState(false);
   const clientRef = useRef(null);
-  
+
   const startDownload = async () => {
     try {
       setTransferring(true);
       setProgress(0);
-      
+
       const client = await SSHClient.connectWithPassword(
         '10.0.0.10',
         22,
@@ -408,18 +408,18 @@ const FileTransferWithCancel = () => {
         'password'
       );
       clientRef.current = client;
-      
+
       client.on('DownloadProgress', (event) => {
         if (event && event.progress !== undefined) {
           setProgress(event.progress);
         }
       });
-      
+
       await client.sftpDownload(
         '/remote/large-file.zip',
         RNFS.DocumentDirectoryPath
       );
-      
+
       console.log('Download complete!');
     } catch (error) {
       if (error.message.includes('cancel')) {
@@ -435,23 +435,23 @@ const FileTransferWithCancel = () => {
       }
     }
   };
-  
+
   const cancelDownload = () => {
     if (clientRef.current && transferring) {
       clientRef.current.sftpCancelDownload();
       console.log('Cancelling download...');
     }
   };
-  
+
   return (
     <View>
-      <Button 
-        title="Start Download" 
+      <Button
+        title="Start Download"
         onPress={startDownload}
         disabled={transferring}
       />
-      <Button 
-        title="Cancel Download" 
+      <Button
+        title="Cancel Download"
         onPress={cancelDownload}
         disabled={!transferring}
       />
@@ -514,7 +514,7 @@ const imagePath = await client.sftpDownload(
 ```javascript
 const downloadLargeFile = async (client, remotePath, localPath) => {
   let retries = 3;
-  
+
   while (retries > 0) {
     try {
       await client.sftpDownload(remotePath, localPath);
@@ -543,7 +543,7 @@ Transfer multiple files sequentially or in parallel:
     '/remote/file2.txt',
     '/remote/file3.txt'
   ];
-  
+
   for (const remoteFile of filesToDownload) {
     try {
       await client.sftpDownload(
@@ -568,7 +568,7 @@ Transfer multiple files sequentially or in parallel:
         'user',
         'password'
       );
-      
+
       try {
         await client.sftpDownload(file, RNFS.DocumentDirectoryPath);
         console.log(`Downloaded: ${file}`);
@@ -576,16 +576,16 @@ Transfer multiple files sequentially or in parallel:
         client.disconnect();
       }
     });
-    
+
     await Promise.all(downloads);
   };
-  
+
   const files = [
     '/remote/file1.txt',
     '/remote/file2.txt',
     '/remote/file3.txt'
   ];
-  
+
   await downloadFiles(files);
   ```
 </Accordion>
@@ -600,7 +600,7 @@ Transfer multiple files sequentially or in parallel:
       '/home/user/file.txt',
       RNFS.DocumentDirectoryPath
     );
-    
+
     // Avoid relative paths
     await client.sftpDownload(
       'file.txt',  // Where is this?
@@ -608,24 +608,24 @@ Transfer multiple files sequentially or in parallel:
     );
     ```
   </Step>
-  
+
   <Step title="Check available storage space">
     ```javascript
     import RNFS from 'react-native-fs';
-    
+
     const freeSpace = await RNFS.getFSInfo();
     const fileInfo = await client.sftpLs('/remote');
     const targetFile = fileInfo.find(f => f.filename === 'large-file.zip');
-    
+
     if (targetFile.fileSize > freeSpace.freeSpace) {
       console.error('Insufficient storage space');
       return;
     }
-    
+
     await client.sftpDownload('/remote/large-file.zip', RNFS.DocumentDirectoryPath);
     ```
   </Step>
-  
+
   <Step title="Handle network interruptions">
     ```javascript
     const downloadWithRetry = async (remotePath, localPath, maxRetries = 3) => {
@@ -641,11 +641,11 @@ Transfer multiple files sequentially or in parallel:
     };
     ```
   </Step>
-  
+
   <Step title="Clean up partial transfers">
     ```javascript
     const downloadPath = `${RNFS.DocumentDirectoryPath}/download.zip`;
-    
+
     try {
       await client.sftpDownload('/remote/file.zip', RNFS.DocumentDirectoryPath);
     } catch (error) {

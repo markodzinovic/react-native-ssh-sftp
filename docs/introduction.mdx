@@ -1,11 +1,9 @@
 ---
 title: Introduction
-description: SSH and SFTP client library for React Native on iOS and Android
+description: SSH and SFTP client library for React Native on iOS and Android.
 ---
 
 import { EditThisPage } from "/snippets/edit-this-page.jsx"
-
-# React Native SSH SFTP
 
 A powerful SSH and SFTP client library for React Native applications, providing seamless connectivity to remote servers on both iOS and Android platforms.
 
@@ -16,23 +14,23 @@ On iOS, this package currently doesn't support the simulator. You will need to r
 ## Key Features
 
 <CardGroup cols={2}>
-  <Card title="Multiple Authentication Methods" icon="key">
-    Support for both password-based and public key authentication with optional passphrase protection
+  <Card title="Multiple Authentication Methods" icon="key" href="concepts/authentication">
+    Support for both password-based and public key authentication with optional passphrase protection.
   </Card>
-  <Card title="SSH Command Execution" icon="terminal">
-    Execute remote commands and receive output with full promise-based API
+  <Card title="SSH Command Execution" icon="terminal" href="guides/ssh-commands">
+    Execute remote commands and receive output with fully promise-based API.
   </Card>
-  <Card title="Interactive Shell Sessions" icon="window">
-    Start and manage interactive shell sessions with support for multiple PTY types (vanilla, vt100, vt102, vt220, ansi, xterm)
+  <Card title="Interactive Shell Sessions" icon="window" href="guides/interactive-shell">
+    Start and manage interactive shell sessions with support for multiple PTY types.
   </Card>
-  <Card title="Full SFTP Support" icon="folder">
-    Complete file transfer capabilities including upload, download, directory operations, and progress tracking
+  <Card title="Full SFTP Support" icon="folder" href="guides/sftp-operations">
+    Complete file transfer capabilities including upload, download, directory operations, and progress tracking.
   </Card>
-  <Card title="Cross-Platform" icon="mobile">
-    Works on both iOS (using NMSSH) and Android (using JSch) with a unified API
+  <Card title="Cross-Platform" icon="mobile" href="guides/platform-specific">
+    Works on both iOS and Android with a unified API.
   </Card>
-  <Card title="TypeScript Support" icon="code">
-    Fully typed API with comprehensive interfaces and type definitions
+  <Card title="TypeScript Support" icon="code" href="api/types">
+    Fully typed API with comprehensive interfaces and type definitions.
   </Card>
 </CardGroup>
 
@@ -47,34 +45,26 @@ With this library, you can build React Native applications that:
 - Maintain interactive shell sessions
 - Connect using password or key-based authentication
 
-## Get Started
+## Getting Started
 
 <CardGroup cols={3}>
   <Card title="Installation" icon="download" href="/installation">
-    Install the library and configure your project for iOS and Android
+    Install the library and configure your project for iOS and Android.
   </Card>
   <Card title="Quick Start" icon="rocket" href="/quickstart">
-    Get up and running with a simple example in minutes
+    Get up and running with a simple example in minutes.
   </Card>
   <Card title="API Reference" icon="book" href="/api/sshclient">
-    Explore the complete API documentation
+    Explore the complete API documentation.
   </Card>
 </CardGroup>
-
-## Platform Support
-
-This library wraps proven SSH/SFTP implementations:
-
-- **iOS**: [NMSSH](https://github.com/aanah0/NMSSH) (aanah0's fork with updated libssh)
-- **Android**: [JSch](http://www.jcraft.com/jsch/) (Matthias Wiedemann fork)
 
 ## Requirements
 
 - React Native 0.60 or later (supports autolinking)
-- iOS physical device (simulator not supported)
-- Android: No additional requirements
 - Node.js 18.16.0 or later
 - npm 9.5.0 or later
-
+- iOS physical device (the simulator is not supported at this time)
+- Android: No additional requirements
 
 <EditThisPage filePath="docs/introduction.mdx" />

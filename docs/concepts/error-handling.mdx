@@ -1,6 +1,6 @@
 ---
 title: Error Handling
-description: Best practices for handling errors in React Native SSH SFTP
+description: Best practices for handling errors in React Native SSH SFTP.
 ---
 
 import { EditThisPage } from "/snippets/edit-this-page.jsx"
@@ -210,7 +210,7 @@ Translate technical errors into user-friendly messages:
 ```typescript
 function getErrorMessage(error: any): string {
   const errorStr = String(error).toLowerCase();
-  
+
   if (errorStr.includes('authentication')) {
     return 'Invalid username or password';
   }
@@ -223,7 +223,7 @@ function getErrorMessage(error: any): string {
   if (errorStr.includes('not found')) {
     return 'File or directory not found';
   }
-  
+
   return 'An unexpected error occurred. Please try again.';
 }
 
@@ -249,19 +249,19 @@ async function connectWithRetry(
   maxRetries = 3
 ): Promise<SSHClient> {
   let lastError;
-  
+
   for (let i = 0; i < maxRetries; i++) {
     try {
       return await SSHClient.connectWithPassword(host, port, username, password);
     } catch (error) {
       lastError = error;
       console.log(`Connection attempt ${i + 1} failed, retrying...`);
-      
+
       // Exponential backoff: 1s, 2s, 4s
       await new Promise(resolve => setTimeout(resolve, 1000 * Math.pow(2, i)));
     }
   }
-  
+
   throw lastError;
 }
 

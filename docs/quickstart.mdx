@@ -1,6 +1,6 @@
 ---
-title: Quickstart
-description: Get up and running with React Native SSH SFTP in minutes
+title: Quick Start
+description: Get up and running with React Native SSH SFTP in minutes.
 ---
 
 import { EditThisPage } from "/snippets/edit-this-page.jsx"
@@ -119,13 +119,13 @@ export default function SSHExample() {
   return (
     <View style={{ padding: 20 }}>
       <Button title="Run SSH Command" onPress={runSSHCommand} />
-      
+
       {output && (
         <ScrollView style={{ marginTop: 20, padding: 10, backgroundColor: '#f0f0f0' }}>
           <Text style={{ fontFamily: 'monospace' }}>{output}</Text>
         </ScrollView>
       )}
-      
+
       {error && (
         <Text style={{ color: 'red', marginTop: 10 }}>Error: {error}</Text>
       )}
@@ -144,16 +144,16 @@ Now that you've successfully connected and executed a command, explore more feat
 
 <CardGroup cols={2}>
   <Card title="Interactive Shell" icon="terminal" href="/guides/interactive-shell">
-    Learn how to create interactive shell sessions
+    Learn how to create interactive shell sessions.
   </Card>
   <Card title="SFTP Operations" icon="folder" href="/guides/sftp-operations">
-    Transfer files and manage directories
+    Transfer files and manage directories.
   </Card>
   <Card title="Authentication" icon="key" href="/concepts/authentication">
-    Understand authentication methods and key management
+    Understand authentication methods and key management.
   </Card>
   <Card title="API Reference" icon="code" href="/api/sshclient">
-    Explore the complete API documentation
+    Explore the complete API documentation.
   </Card>
 </CardGroup>
 

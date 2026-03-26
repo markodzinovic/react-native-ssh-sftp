@@ -1,20 +1,27 @@
 ---
 title: Security
-description: Learn how to report vulnerabilities, which versions are supported, and the project's security practices
+description: Learn how to report vulnerabilities, which versions are supported, and the project's security practices.
 ---
 
 import { EditThisPage } from "/snippets/edit-this-page.jsx"
 
-# Security
-
 This page summarizes the project's security policy and how to report vulnerabilities responsibly.
+
+<CardGroup cols={2}>
+  <Card title="Report a Vulnerability" icon="shield" href="#reporting-a-vulnerability">
+    Contact the maintainer privately by [email](mailto:github+react-native-ssh-sftp-security@dylankenneally.com) instead of opening a public issue.
+  </Card>
+  <Card title="Supported Versions" icon="clock" href="#supported-versions">
+    Check which release lines are currently supported before reporting or triaging an issue.
+  </Card>
+</CardGroup>
 
 ## Reporting a vulnerability
 
 If you discover a security issue in this project:
 
 1. Do not open a public GitHub issue.
-1. Email github+react-native-ssh-sftp-security@dylankenneally.com.
+1. Email [github+react-native-ssh-sftp-security@dylankenneally.com](mailto:github+react-native-ssh-sftp-security@dylankenneally.com).
 1. Include:
    - A description of the vulnerability
    - Steps to reproduce it
@@ -43,6 +50,12 @@ When using React Native SSH SFTP in your app:
 - Prefer the latest stable version of the package
 - Report suspected issues responsibly
 - Follow OWASP guidance for SSH and SFTP-related operations
+
+## What to avoid
+
+- Do not disclose a vulnerability publicly before giving the maintainer time to investigate
+- Do not use public GitHub issues for exploit details or reproduction steps
+- Do not assume older unsupported versions will receive fixes
 
 ## Related resources
 

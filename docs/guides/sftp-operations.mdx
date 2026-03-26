@@ -1,6 +1,6 @@
 ---
 title: SFTP Operations
-description: Learn how to perform SFTP operations including listing, creating, and removing directories
+description: Learn how to perform SFTP operations including listing, creating, and removing directories.
 ---
 
 import { EditThisPage } from "/snippets/edit-this-page.jsx"
@@ -52,77 +52,77 @@ interface LsResult {
     ```javascript
     // List files in current directory (user's home)
     const files = await client.sftpLs('.');
-    
+
     files.forEach(file => {
       const type = file.isDirectory ? 'DIR' : 'FILE';
       console.log(`${type}: ${file.filename} (${file.fileSize} bytes)`);
     });
     ```
   </Tab>
-  
+
   <Tab title="Filter Files">
     ```javascript
     const files = await client.sftpLs('/var/www');
-    
+
     // Get only directories
     const directories = files.filter(f => f.isDirectory);
-    
+
     // Get only files
     const regularFiles = files.filter(f => !f.isDirectory);
-    
+
     // Get files larger than 1MB
     const largeFiles = files.filter(f => f.fileSize > 1024 * 1024);
-    
+
     // Get recently modified files (last 24 hours)
     const oneDayAgo = Date.now() - (24 * 60 * 60 * 1000);
-    const recentFiles = files.filter(f => 
+    const recentFiles = files.filter(f =>
       new Date(f.modificationDate).getTime() > oneDayAgo
     );
     ```
   </Tab>
-  
+
   <Tab title="Sort Results">
     ```javascript
     const files = await client.sftpLs('/documents');
-    
+
     // Sort by size (largest first)
     const bySize = [...files].sort((a, b) => b.fileSize - a.fileSize);
-    
+
     // Sort by modification date (newest first)
-    const byDate = [...files].sort((a, b) => 
-      new Date(b.modificationDate).getTime() - 
+    const byDate = [...files].sort((a, b) =>
+      new Date(b.modificationDate).getTime() -
       new Date(a.modificationDate).getTime()
     );
-    
+
     // Sort alphabetically
-    const byName = [...files].sort((a, b) => 
+    const byName = [...files].sort((a, b) =>
       a.filename.localeCompare(b.filename)
     );
     ```
   </Tab>
-  
+
   <Tab title="Format Output">
     ```javascript
     const files = await client.sftpLs('/home/user');
-    
+
     const formatSize = (bytes) => {
       const units = ['B', 'KB', 'MB', 'GB'];
       let size = bytes;
       let unitIndex = 0;
-      
+
       while (size >= 1024 && unitIndex < units.length - 1) {
         size /= 1024;
         unitIndex++;
       }
-      
+
       return `${size.toFixed(2)} ${units[unitIndex]}`;
     };
-    
+
     files.forEach(file => {
       const icon = file.isDirectory ? '📁' : '📄';
       const size = formatSize(file.fileSize);
       const date = new Date(file.modificationDate).toLocaleDateString();
-      
+
       console.log(`${icon} ${file.filename.padEnd(30)} ${size.padStart(10)} ${date}`);
     });
     ```
@@ -153,10 +153,10 @@ To create nested directories, you need to create each level individually:
 const createNestedDirectory = async (client, path) => {
   const parts = path.split('/').filter(p => p);
   let currentPath = '';
-  
+
   for (const part of parts) {
     currentPath += '/' + part;
-    
+
     try {
       await client.sftpMkdir(currentPath);
       console.log(`Created: ${currentPath}`);
@@ -164,10 +164,10 @@ const createNestedDirectory = async (client, path) => {
       // Directory might already exist, check with sftpLs
       const parent = currentPath.split('/').slice(0, -1).join('/') || '/';
       const files = await client.sftpLs(parent);
-      const exists = files.some(f => 
+      const exists = files.some(f =>
         f.filename === part && f.isDirectory
       );
-      
+
       if (!exists) {
         throw error; // Re-throw if it's not an "already exists" error
       }
@@ -199,15 +199,15 @@ Here's a helper function to remove a directory and all its contents:
 ```javascript
 const removeDirectoryRecursive = async (client, path) => {
   const files = await client.sftpLs(path);
-  
+
   for (const file of files) {
     // Skip . and .. entries
     if (file.filename === '.' || file.filename === '..') {
       continue;
     }
-    
+
     const filePath = `${path}/${file.filename}`;
-    
+
     if (file.isDirectory) {
       // Recursively remove subdirectory
       await removeDirectoryRecursive(client, filePath);
@@ -217,7 +217,7 @@ const removeDirectoryRecursive = async (client, path) => {
       console.log(`Deleted file: ${filePath}`);
     }
   }
-  
+
   // Remove the now-empty directory
   await client.sftpRmdir(path);
   console.log(`Deleted directory: ${path}`);
@@ -276,10 +276,10 @@ import { Platform } from 'react-native';
 if (Platform.OS === 'android') {
   // Make file readable and writable by owner only (0600)
   await client.sftpChmod('/home/user/private.txt', 0o600);
-  
+
   // Make directory accessible to everyone (0755)
   await client.sftpChmod('/home/user/public', 0o755);
-  
+
   // Make file executable (0755)
   await client.sftpChmod('/home/user/script.sh', 0o755);
 }
@@ -329,20 +329,20 @@ client.disconnectSFTP();
 <Steps>
   <Step title="Check before operations">
     Use `sftpLs()` to verify paths exist before performing operations:
-    
+
     ```javascript
     const files = await client.sftpLs('/home/user');
     const exists = files.some(f => f.filename === 'target-folder');
-    
+
     if (!exists) {
       await client.sftpMkdir('/home/user/target-folder');
     }
     ```
   </Step>
-  
+
   <Step title="Handle errors gracefully">
     Different errors require different handling strategies:
-    
+
     ```javascript
     try {
       await client.sftpRmdir(path);
@@ -357,14 +357,14 @@ client.disconnectSFTP();
     }
     ```
   </Step>
-  
+
   <Step title="Use absolute paths">
     Always use absolute paths when possible to avoid confusion:
-    
+
     ```javascript
     // Good
     await client.sftpLs('/home/user/documents');
-    
+
     // Less reliable (depends on current directory)
     await client.sftpLs('documents');
     ```

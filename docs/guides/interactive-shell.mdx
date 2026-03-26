@@ -1,6 +1,6 @@
 ---
 title: Interactive Shell Sessions
-description: Work with persistent shell sessions using startShell, writeToShell, and shell events
+description: Work with persistent shell sessions using startShell, writeToShell, and shell events.
 ---
 
 import { EditThisPage } from "/snippets/edit-this-page.jsx"
@@ -35,35 +35,35 @@ The library supports multiple PTY types for different terminal emulation needs:
     ```
     Basic terminal type with minimal features. Use this for simple command execution without special terminal requirements.
   </Tab>
-  
+
   <Tab title="VT100">
     ```javascript
     client.startShell(PtyType.VT100)
     ```
     Classic VT100 terminal emulation. Compatible with most legacy systems and applications.
   </Tab>
-  
+
   <Tab title="VT102">
     ```javascript
     client.startShell(PtyType.VT102)
     ```
     Enhanced version of VT100 with additional features.
   </Tab>
-  
+
   <Tab title="VT220">
     ```javascript
     client.startShell(PtyType.VT220)
     ```
     Advanced VT terminal with extended character sets and features.
   </Tab>
-  
+
   <Tab title="ANSI">
     ```javascript
     client.startShell(PtyType.ANSI)
     ```
     ANSI standard terminal. Good for applications requiring ANSI escape sequences.
   </Tab>
-  
+
   <Tab title="XTERM">
     ```javascript
     client.startShell(PtyType.XTERM)
@@ -93,27 +93,27 @@ Set up an event listener to receive output from the shell:
     });
     ```
   </Step>
-  
+
   <Step title="Start the shell session">
     ```javascript
     await client.startShell(PtyType.XTERM);
     ```
   </Step>
-  
+
   <Step title="Process incoming data">
     The `Shell` event will fire whenever the remote shell sends output:
-    
+
     ```javascript
     let buffer = '';
-    
+
     client.on('Shell', (output) => {
       if (output) {
         buffer += output;
-        
+
         // Process complete lines
         const lines = buffer.split('\n');
         buffer = lines.pop() || ''; // Keep incomplete line in buffer
-        
+
         lines.forEach(line => {
           console.log('Complete line:', line);
         });
@@ -158,32 +158,32 @@ const runInteractiveSession = async () => {
       'user',
       'password'
     );
-    
+
     // Set up shell output handler
     client.on('Shell', (output) => {
       if (output) {
         console.log('[Shell]', output);
       }
     });
-    
+
     // Start the shell
     await client.startShell(PtyType.XTERM);
     console.log('Shell started');
-    
+
     // Execute commands with state persistence
     await client.writeToShell('cd /var/log\n');
     await new Promise(resolve => setTimeout(resolve, 500));
-    
+
     await client.writeToShell('pwd\n');
     await new Promise(resolve => setTimeout(resolve, 500));
-    
+
     await client.writeToShell('ls -l\n');
     await new Promise(resolve => setTimeout(resolve, 1000));
-    
+
     // Close the shell when done
     client.closeShell();
     console.log('Shell closed');
-    
+
     // Disconnect
     client.disconnect();
   } catch (error) {
@@ -232,7 +232,7 @@ One of the key advantages of shell sessions over `execute()` is state persistenc
   // With execute() - each command runs in a fresh context
   await client.execute('cd /var/www'); // Changes directory
   await client.execute('pwd'); // Still in home directory!
-  
+
   // With shell - state persists
   await client.writeToShell('cd /var/www\n');
   await client.writeToShell('pwd\n'); // Shows /var/www
@@ -243,7 +243,7 @@ One of the key advantages of shell sessions over `execute()` is state persistenc
   ```javascript
   // Set an environment variable
   await client.writeToShell('export MY_VAR=hello\n');
-  
+
   // Use it in subsequent commands
   await client.writeToShell('echo $MY_VAR\n'); // Outputs: hello
   ```
@@ -253,11 +253,11 @@ One of the key advantages of shell sessions over `execute()` is state persistenc
   ```javascript
   // Start an interactive program
   await client.writeToShell('python3\n');
-  
+
   // Send Python commands
   await client.writeToShell('x = 5\n');
   await client.writeToShell('print(x * 2)\n');
-  
+
   // Exit Python
   await client.writeToShell('exit()\n');
   ```
