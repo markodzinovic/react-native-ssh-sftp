@@ -1,6 +1,6 @@
 ---
 title: 'SFTP Transfer Operations'
-description: 'Upload and download files with progress tracking'
+description: 'Upload and download files with progress tracking.'
 ---
 
 import { EditThisPage } from "/snippets/edit-this-page.jsx"
@@ -27,7 +27,7 @@ sftpUpload(localFilePath: string, remoteFilePath: string, callback?: CallbackFun
 
 <ParamField path="callback" type="CallbackFunction<void>" optional>
   Optional callback function to be called after the upload is complete or an error occurs.
-  
+
   ```typescript
   (error: any, response?: void) => void
   ```
@@ -50,7 +50,7 @@ try {
   const localPath = Platform.OS === 'ios'
     ? '/var/mobile/Containers/Data/Application/.../Documents/file.txt'
     : '/data/user/0/com.yourapp/files/file.txt';
-  
+
   await client.sftpUpload(localPath, '/home/user/file.txt');
   console.log('File uploaded successfully');
 } catch (error) {
@@ -149,7 +149,7 @@ sftpDownload(remoteFilePath: string, localFilePath: string, callback?: CallbackF
 
 <ParamField path="callback" type="CallbackFunction<string>" optional>
   Optional callback function to handle the result of the download.
-  
+
   ```typescript
   (error: any, response?: string) => void
   ```

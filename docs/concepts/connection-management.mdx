@@ -1,6 +1,6 @@
 ---
 title: Connection Management
-description: Understand SSH and SFTP connection lifecycle in React Native SSH SFTP
+description: Understand SSH and SFTP connection lifecycle in React Native SSH SFTP.
 ---
 
 import { EditThisPage } from "/snippets/edit-this-page.jsx"
@@ -228,11 +228,11 @@ disconnect(): void {
 // Always disconnect when done
 try {
   const client = await SSHClient.connectWithPassword(host, port, username, password);
-  
+
   // Perform operations
   await client.execute('ls');
   const files = await client.sftpLs('.');
-  
+
 } finally {
   // Ensure cleanup even if errors occur
   client.disconnect();

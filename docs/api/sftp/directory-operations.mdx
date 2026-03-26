@@ -1,6 +1,6 @@
 ---
 title: 'SFTP Directory Operations'
-description: 'Manage directories on remote servers using SFTP'
+description: 'Manage directories on remote servers using SFTP.'
 ---
 
 import { EditThisPage } from "/snippets/edit-this-page.jsx"
@@ -23,7 +23,7 @@ sftpLs(path: string, callback?: CallbackFunction<LsResult[]>): Promise<LsResult[
 
 <ParamField path="callback" type="CallbackFunction<LsResult[]>" optional>
   Optional callback function to handle the result asynchronously.
-  
+
   ```typescript
   (error: any, response?: LsResult[]) => void
   ```
@@ -136,7 +136,7 @@ sftpMkdir(path: string, callback?: CallbackFunction<void>): Promise<void>
 
 <ParamField path="callback" type="CallbackFunction<void>" optional>
   Optional callback function to handle the result.
-  
+
   ```typescript
   (error: any, response?: void) => void
   ```
@@ -174,7 +174,7 @@ client.sftpMkdir('/home/user/new-directory', (error) => {
 async function createNestedDir(client: SSHClient, path: string) {
   const parts = path.split('/').filter(Boolean);
   let currentPath = '';
-  
+
   for (const part of parts) {
     currentPath += '/' + part;
     try {
@@ -213,7 +213,7 @@ sftpRmdir(path: string, callback?: CallbackFunction<void>): Promise<void>
 
 <ParamField path="callback" type="CallbackFunction<void>" optional>
   Optional callback function to handle the result or error.
-  
+
   ```typescript
   (error: any, response?: void) => void
   ```
@@ -253,18 +253,18 @@ async function removeDirectoryRecursive(
   path: string
 ): Promise<void> {
   const files = await client.sftpLs(path);
-  
+
   // Remove all files and subdirectories first
   for (const file of files) {
     const fullPath = `${path}/${file.filename}`;
-    
+
     if (file.isDirectory) {
       await removeDirectoryRecursive(client, fullPath);
     } else {
       await client.sftpRm(fullPath);
     }
   }
-  
+
   // Remove the now-empty directory
   await client.sftpRmdir(path);
 }

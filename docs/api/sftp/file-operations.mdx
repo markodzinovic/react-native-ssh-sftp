@@ -1,6 +1,6 @@
 ---
 title: 'SFTP File Operations'
-description: 'Manage files on remote servers using SFTP'
+description: 'Manage files on remote servers using SFTP.'
 ---
 
 import { EditThisPage } from "/snippets/edit-this-page.jsx"
@@ -23,7 +23,7 @@ sftpRm(path: string, callback?: CallbackFunction<void>): Promise<void>
 
 <ParamField path="callback" type="CallbackFunction<void>" optional>
   Optional callback function to handle the result or error.
-  
+
   ```typescript
   (error: any, response?: void) => void
   ```
@@ -82,7 +82,7 @@ sftpRename(oldPath: string, newPath: string, callback?: CallbackFunction<void>):
 
 <ParamField path="callback" type="CallbackFunction<void>" optional>
   Optional callback function to handle the result or error.
-  
+
   ```typescript
   (error: any, response?: void) => void
   ```
@@ -148,7 +148,7 @@ sftpChmod(path: string, permissions: number, callback?: CallbackFunction<void>):
 
 <ParamField path="permissions" type="number" required>
   The new permissions to set in octal format (e.g., `0o755` or `493`).
-  
+
   Common permission values:
   - `0o755` (493): Read, write, execute for owner; read and execute for group and others
   - `0o644` (420): Read and write for owner; read-only for group and others
@@ -157,7 +157,7 @@ sftpChmod(path: string, permissions: number, callback?: CallbackFunction<void>):
 
 <ParamField path="callback" type="CallbackFunction<void>" optional>
   Optional callback function to handle the result or error.
-  
+
   ```typescript
   (error: any, response?: void) => void
   ```

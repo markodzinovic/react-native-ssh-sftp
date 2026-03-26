@@ -1,6 +1,6 @@
 ---
 title: Executing SSH Commands
-description: Learn how to execute SSH commands on remote servers using the execute() method
+description: Learn how to execute SSH commands on remote servers using the execute() method.
 ---
 
 import { EditThisPage } from "/snippets/edit-this-page.jsx"
@@ -25,52 +25,52 @@ client.execute(command)
     ```javascript
     // List files in a directory
     const files = await client.execute('ls -la /var/www');
-    
+
     // Check disk usage
     const diskUsage = await client.execute('df -h');
-    
+
     // Find files modified in last 24 hours
     const recentFiles = await client.execute('find /home -mtime -1');
     ```
   </Tab>
-  
+
   <Tab title="System Information">
     ```javascript
     // Get system uptime
     const uptime = await client.execute('uptime');
-    
+
     // Check memory usage
     const memory = await client.execute('free -m');
-    
+
     // View running processes
     const processes = await client.execute('ps aux');
-    
+
     // Get OS information
     const osInfo = await client.execute('uname -a');
     ```
   </Tab>
-  
+
   <Tab title="Service Management">
     ```javascript
     // Check service status
     const status = await client.execute('systemctl status nginx');
-    
+
     // Restart a service (requires sudo)
     const restart = await client.execute('sudo systemctl restart apache2');
-    
+
     // View service logs
     const logs = await client.execute('journalctl -u ssh -n 50');
     ```
   </Tab>
-  
+
   <Tab title="Network Operations">
     ```javascript
     // Check network connections
     const connections = await client.execute('netstat -tuln');
-    
+
     // Ping a host
     const ping = await client.execute('ping -c 4 google.com');
-    
+
     // Check open ports
     const ports = await client.execute('ss -tuln');
     ```
@@ -96,22 +96,22 @@ client.execute('whoami', (error, output) => {
 <Steps>
   <Step title="Chain with shell operators">
     You can chain multiple commands using shell operators like `&&`, `||`, or `;`:
-    
+
     ```javascript
     // Execute commands sequentially (all must succeed)
     await client.execute('cd /var/www && ls -l && pwd');
-    
+
     // Execute with fallback
     await client.execute('command1 || command2');
-    
+
     // Execute regardless of previous command status
     await client.execute('command1; command2; command3');
     ```
   </Step>
-  
+
   <Step title="Use pipes">
     Pipe output between commands:
-    
+
     ```javascript
     const result = await client.execute('ps aux | grep node | wc -l');
     console.log('Number of Node processes:', result.trim());

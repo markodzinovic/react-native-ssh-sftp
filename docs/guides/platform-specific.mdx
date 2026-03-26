@@ -1,6 +1,6 @@
 ---
 title: Platform-Specific Considerations
-description: Important differences between iOS and Android implementations, including simulator limitations and known issues
+description: Important differences between iOS and Android implementations, including simulator limitations and known issues.
 ---
 
 import { EditThisPage } from "/snippets/edit-this-page.jsx"
@@ -18,7 +18,7 @@ The underlying implementation differs between platforms:
     ```javascript
     // iOS uses a unified connection method internally
     // Both password and key authentication use the same native method
-    
+
     // Password authentication
     const client = await SSHClient.connectWithPassword(
       '10.0.0.10',
@@ -26,7 +26,7 @@ The underlying implementation differs between platforms:
       'user',
       'password'
     );
-    
+
     // Key authentication
     const client = await SSHClient.connectWithKey(
       '10.0.0.10',
@@ -35,15 +35,15 @@ The underlying implementation differs between platforms:
       privateKey,
       passphrase
     );
-    
+
     // Internally both call: RNSSHClient.connectToHost()
     ```
   </Tab>
-  
+
   <Tab title="Android">
     ```javascript
     // Android uses separate native methods for each auth type
-    
+
     // Password authentication
     const client = await SSHClient.connectWithPassword(
       '10.0.0.10',
@@ -52,8 +52,8 @@ The underlying implementation differs between platforms:
       'password'
     );
     // Calls: RNSSHClient.connectToHostByPassword()
-    
-    // Key authentication  
+
+    // Key authentication
     const client = await SSHClient.connectWithKey(
       '10.0.0.10',
       22,
@@ -111,8 +111,8 @@ The platforms use different event emitter implementations:
 
 ```typescript
 // From sshclient.ts:269
-const listenerInterface = Platform.OS === 'ios' 
-  ? RNSSHClientEmitter 
+const listenerInterface = Platform.OS === 'ios'
+  ? RNSSHClientEmitter
   : DeviceEventEmitter;
 ```
 
@@ -149,7 +149,7 @@ const connectSSH = async () => {
     // Use mock data or skip SSH operations
     return null;
   }
-  
+
   return await SSHClient.connectWithPassword(
     '10.0.0.10',
     22,
@@ -164,25 +164,25 @@ const connectSSH = async () => {
 <Steps>
   <Step title="Use Android Emulator for development">
     The Android emulator fully supports SSH operations:
-    
+
     ```bash
     # Run on Android emulator
     npx react-native run-android
     ```
   </Step>
-  
+
   <Step title="Test on physical iOS device">
     For iOS testing, always use a physical device:
-    
+
     ```bash
     # Run on physical iOS device
     npx react-native run-ios --device "Your iPhone Name"
     ```
   </Step>
-  
+
   <Step title="Implement platform checks">
     Add runtime checks to gracefully handle simulator scenarios:
-    
+
     ```javascript
     if (Platform.OS === 'ios' && __DEV__) {
       console.warn(
@@ -223,10 +223,10 @@ target 'YourAppName' do
     # Disable Flipper to avoid OpenSSL conflicts
     # :flipper_configuration => flipper_config,  # Comment out this line
   )
-  
+
   # Add the NMSSH fork
   pod 'NMSSH', :git => 'https://github.com/aanah0/NMSSH.git'
-  
+
   # ... rest of your Podfile
 end
 ```
@@ -251,33 +251,33 @@ The library wraps different native SSH implementations on each platform:
 <Tabs>
   <Tab title="iOS">
     **NMSSH Library**
-    
+
     - Based on libssh
     - Requires manual Podfile configuration
     - Uses aanah0's fork for updated libssh version
-    
+
     ```ruby
     # In ios/Podfile
     pod 'NMSSH', :git => 'https://github.com/aanah0/NMSSH.git'
     ```
-    
+
     After modifying the Podfile:
-    
+
     ```bash
     cd ios
     pod install
     cd ..
     ```
   </Tab>
-  
+
   <Tab title="Android">
     **JSch Library**
-    
+
     - Pure Java SSH implementation
     - Uses Matthias Wiedemann's fork
     - No additional configuration needed
     - Automatically included via Gradle
-    
+
     The dependency is managed automatically in the library's `build.gradle`.
   </Tab>
 </Tabs>
@@ -287,10 +287,10 @@ The library wraps different native SSH implementations on each platform:
 <Steps>
   <Step title="Abstract platform differences">
     Create wrapper functions that handle platform-specific code:
-    
+
     ```javascript
     import { Platform } from 'react-native';
-    
+
     export const changeFilePermissions = async (client, path, permissions) => {
       if (Platform.OS === 'android') {
         await client.sftpChmod(path, permissions);
@@ -300,15 +300,15 @@ The library wraps different native SSH implementations on each platform:
         await client.execute(`chmod ${octal} ${path}`);
       }
     };
-    
+
     // Usage (works on both platforms)
     await changeFilePermissions(client, '/home/user/file.txt', 0o644);
     ```
   </Step>
-  
+
   <Step title="Test on both platforms">
     Always test your SSH functionality on both platforms:
-    
+
     ```javascript
     // Create platform-specific test suites
     describe('SSH Operations', () => {
@@ -317,7 +317,7 @@ The library wraps different native SSH implementations on each platform:
           // Android-specific tests
         }
       });
-      
+
       it('should work on iOS', async () => {
         if (Platform.OS === 'ios') {
           // iOS-specific tests (on device only)
@@ -326,17 +326,17 @@ The library wraps different native SSH implementations on each platform:
     });
     ```
   </Step>
-  
+
   <Step title="Graceful degradation">
     Handle unavailable features gracefully:
-    
+
     ```javascript
     const features = {
       chmod: Platform.OS === 'android',
       sftpDisconnect: Platform.OS === 'android',
       simulator: Platform.OS !== 'ios' // Only Android simulator works
     };
-    
+
     if (features.chmod) {
       await client.sftpChmod(path, 0o644);
     } else {
@@ -351,21 +351,21 @@ The library wraps different native SSH implementations on each platform:
 
 <Accordion title="iOS: Cannot test on simulator">
   **Issue**: SSH functionality doesn't work on iOS simulator.
-  
+
   **Workaround**: Use physical iOS device for testing, or develop/test primarily on Android emulator.
-  
+
   See: [GitHub Issue #20](https://github.com/dylankenneally/react-native-ssh-sftp/issues/20)
 </Accordion>
 
 <Accordion title="iOS: SFTP disconnect incomplete">
   **Issue**: `disconnectSFTP()` doesn't fully close the SFTP channel on iOS.
-  
+
   **Workaround**: Use `disconnect()` to close both SSH and SFTP connections.
-  
+
   ```javascript
   // Instead of:
   client.disconnectSFTP();
-  
+
   // Use:
   client.disconnect(); // Closes everything
   ```
@@ -373,9 +373,9 @@ The library wraps different native SSH implementations on each platform:
 
 <Accordion title="iOS: OpenSSL conflicts with Flipper">
   **Issue**: Flipper's OpenSSL conflicts with NMSSH's OpenSSL.
-  
+
   **Workaround**: Disable Flipper in your Podfile.
-  
+
   ```ruby
   # Comment out this line:
   # :flipper_configuration => flipper_config,
@@ -384,9 +384,9 @@ The library wraps different native SSH implementations on each platform:
 
 <Accordion title="Android: No chmod support needed">
   **Issue**: iOS doesn't have native chmod support.
-  
+
   **Workaround**: Use SSH execute() with chmod command.
-  
+
   ```javascript
   if (Platform.OS === 'ios') {
     await client.execute('chmod 644 /path/to/file');
@@ -404,13 +404,13 @@ import { Platform } from 'react-native';
 export const SSHPlatformUtils = {
   // Check if chmod is natively supported
   hasNativeChmod: () => Platform.OS === 'android',
-  
+
   // Check if we can use disconnectSFTP reliably
   canDisconnectSFTP: () => Platform.OS === 'android',
-  
+
   // Check if simulator/emulator is supported
   supportsEmulator: () => Platform.OS === 'android',
-  
+
   // Get platform-specific connection method
   getConnectionInfo: () => ({
     platform: Platform.OS,
