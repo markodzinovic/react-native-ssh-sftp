@@ -2,7 +2,7 @@
 
 Thank you for your interest in contributing to the documentation for `react-native-ssh-sftp`, this guide will help you get started.
 
-If you would like to contribute to the code, please see the main [contributing guide for the repo](/CONTRIBUTING.md).
+If you would like to contribute to the code, please see the main [contributing guide for the repo](../CONTRIBUTING.md).
 
 ## How to contribute
 
@@ -21,7 +21,7 @@ If you would like to contribute to the code, please see the main [contributing g
 1. Run `npm run docs` to build and view your changes at `http://localhost:3000`
 1. Commit your changes and submit a pull request
 
-For more details on local development, see the [docs README](/README.md).
+For more details on local development, see the [docs README](./README.md).
 
 ## Writing guidelines
 
