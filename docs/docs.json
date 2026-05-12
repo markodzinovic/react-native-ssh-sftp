@@ -1,0 +1,118 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "name": "React Native SSH SFTP",
+  "theme": "mint",
+  "colors": {
+    "primary": "#58a6ff",
+    "light": "#58a6ff",
+    "dark": "#58a6ff"
+  },
+  "logo": "/logo/logo.svg",
+  "favicon": "/favicon.ico",
+  "metadata": {
+    "timestamp": true
+  },
+  "navbar": {
+    "links": [
+      { "label": "Community", "href": "https://github.com/dylankenneally/react-native-ssh-sftp/discussions" }
+    ],
+    "primary": {
+      "type": "github",
+      "href": "https://github.com/dylankenneally/react-native-ssh-sftp"
+    }
+  },
+  "footer": {
+    "socials": {
+      "github": "https://github.com/dylankenneally/react-native-ssh-sftp"
+    }
+  },
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "pages": [
+              "introduction",
+              "installation",
+              "quickstart"
+            ]
+          },
+          {
+            "group": "Core Concepts",
+            "pages": [
+              "concepts/authentication",
+              "concepts/connection-management",
+              "concepts/error-handling"
+            ]
+          },
+          {
+            "group": "Guides",
+            "pages": [
+              "guides/ssh-commands",
+              "guides/interactive-shell",
+              "guides/sftp-operations",
+              "guides/file-transfers",
+              "guides/platform-specific"
+            ]
+          },
+          {
+            "group": "Project",
+            "pages": [
+              "guides/contributing",
+              "guides/security",
+              "guides/license"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API Reference",
+        "groups": [
+          {
+            "group": "Client",
+            "pages": [
+              "api/sshclient",
+              "api/connection-methods"
+            ]
+          },
+          {
+            "group": "SSH Operations",
+            "pages": [
+              "api/ssh/execute",
+              "api/ssh/shell"
+            ]
+          },
+          {
+            "group": "SFTP Operations",
+            "pages": [
+              "api/sftp/connect",
+              "api/sftp/file-operations",
+              "api/sftp/directory-operations",
+              "api/sftp/transfer-operations"
+            ]
+          },
+          {
+            "group": "Types & Interfaces",
+            "pages": [
+              "api/types"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "description": "SSH and SFTP client library for React Native",
+  "appearance": {
+    "strict": false,
+    "default": "system"
+  },
+  "errors": {
+    "404": {
+      "redirect": false,
+      "title": "Page not found :-(",
+      "description": "The page you're looking for doesn't exist. [Go home](/)."
+    }
+  }
+}

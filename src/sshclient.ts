@@ -222,7 +222,7 @@ export default class SSHClient {
    * @returns A string representing the random client key.
    */
   private static getRandomClientKey(): string {
-    // TODO This should be returned by the native code
+    // TODO This should be returned by the native code...
     // There's no need for actual randomness, just uniqueness.
     return Math.floor((1 + Math.random()) * 0x10000)
       .toString(16)
@@ -470,9 +470,9 @@ export default class SSHClient {
           RNSSHClient.sftpLs(path, this._key, (error: CBError, _response: string[]) => {
             const response = _response
               ? _response.map((p) => {
-                  // eslint-disable-next-line no-control-regex -- Control characters are removed from the response, because they can make JSON.parse fail
-                  return JSON.parse(p.replace(/[\u0000-\u001F]/g, '')) as LsResult;
-                })
+                // eslint-disable-next-line no-control-regex -- Control characters are removed from the response, because they can make JSON.parse fail
+                return JSON.parse(p.replace(/[\u0000-\u001F]/g, '')) as LsResult;
+              })
               : undefined;
 
             if (callback) {

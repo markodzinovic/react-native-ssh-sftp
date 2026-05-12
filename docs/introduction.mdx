@@ -1,0 +1,70 @@
+---
+title: Introduction
+description: SSH and SFTP client library for React Native on iOS and Android.
+---
+
+import { EditThisPage } from "/snippets/edit-this-page.jsx"
+
+A powerful SSH and SFTP client library for React Native applications, providing seamless connectivity to remote servers on both iOS and Android platforms.
+
+<Note>
+On iOS, this package currently doesn't support the simulator. You will need to run your app on a physical device. See [this issue](https://github.com/dylankenneally/react-native-ssh-sftp/issues/20) for more details.
+</Note>
+
+## Key Features
+
+<CardGroup cols={2}>
+  <Card title="Multiple Authentication Methods" icon="key" href="concepts/authentication">
+    Support for both password-based and public key authentication with optional passphrase protection.
+  </Card>
+  <Card title="SSH Command Execution" icon="terminal" href="guides/ssh-commands">
+    Execute remote commands and receive output with fully promise-based API.
+  </Card>
+  <Card title="Interactive Shell Sessions" icon="window" href="guides/interactive-shell">
+    Start and manage interactive shell sessions with support for multiple PTY types.
+  </Card>
+  <Card title="Full SFTP Support" icon="folder" href="guides/sftp-operations">
+    Complete file transfer capabilities including upload, download, directory operations, and progress tracking.
+  </Card>
+  <Card title="Cross-Platform" icon="mobile" href="guides/platform-specific">
+    Works on both iOS and Android with a unified API.
+  </Card>
+  <Card title="TypeScript Support" icon="code" href="api/types">
+    Fully typed API with comprehensive interfaces and type definitions.
+  </Card>
+</CardGroup>
+
+## What You Can Build
+
+With this library, you can build React Native applications that:
+
+- Execute remote commands on SSH servers
+- Transfer files securely using SFTP
+- Manage remote file systems (create, delete, rename files and directories)
+- Monitor file transfer progress in real-time
+- Maintain interactive shell sessions
+- Connect using password or key-based authentication
+
+## Getting Started
+
+<CardGroup cols={3}>
+  <Card title="Installation" icon="download" href="/installation">
+    Install the library and configure your project for iOS and Android.
+  </Card>
+  <Card title="Quick Start" icon="rocket" href="/quickstart">
+    Get up and running with a simple example in minutes.
+  </Card>
+  <Card title="API Reference" icon="book" href="/api/sshclient">
+    Explore the complete API documentation.
+  </Card>
+</CardGroup>
+
+## Requirements
+
+- React Native 0.60 or later (supports autolinking)
+- Node.js 18.16.0 or later
+- npm 9.5.0 or later
+- iOS physical device (the simulator is not supported at this time)
+- Android: No additional requirements
+
+<EditThisPage filePath="docs/introduction.mdx" />

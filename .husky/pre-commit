@@ -1,13 +1,10 @@
 #!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
-
 
 function log() {
   echo [pre-commit] "$1"
 }
 
 log "Running git pre commit..."
-. "$(dirname "$0")/_/husky.sh"
 
 function hasChanges() {
   if test "$( git status --short | wc -l )" -gt 0; then
