@@ -420,9 +420,11 @@ export default class SSHClient {
 
     return new Promise((resolve, reject) => {
       RNSSHClient.connectSFTP(this._key, (error: CBError) => {
-        this._activeStream.sftp = true;
-        this.registerNativeListener(NATIVE_EVENT_DOWNLOAD_PROGRESS);
-        this.registerNativeListener(NATIVE_EVENT_UPLOAD_PROGRESS);
+        if (!error) {
+          this._activeStream.sftp = true;
+          this.registerNativeListener(NATIVE_EVENT_DOWNLOAD_PROGRESS);
+          this.registerNativeListener(NATIVE_EVENT_UPLOAD_PROGRESS);
+        }
         if (callback) {
           callback(error);
         }
